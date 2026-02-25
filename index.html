@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en" class="dark" suppressHydrationWarning>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Dream Job Coach AI</title>
+  <link rel="icon" href="/favicon.ico" />
+
+  <script>
+    // Prevent flash of unstyled content (FOUC)
+    (function() {
+      var theme = localStorage.getItem('theme') || 'dark';
+      document.documentElement.classList.toggle('dark', theme === 'dark');
+    })();
+  </script>
+
+  <meta name="description" content="AI-powered career coaching application that analyzes resumes, detects skill gaps, and generates personalized placement roadmaps." />
+  <meta name="author" content="Anandita" />
+
+  <meta property="og:title" content="Dream Job Coach AI" />
+  <meta property="og:description" content="AI-powered career coaching application for personalized placement preparation." />
+  <meta property="og:type" content="website" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+</head>
+
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

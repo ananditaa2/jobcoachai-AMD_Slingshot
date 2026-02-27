@@ -1,114 +1,112 @@
-# Dream Job Coach AI 🎯
+<div align="center">
 
-An AI-powered career coaching platform that helps students and job seekers prepare for placements at top tech companies. Built with React + Vite (frontend) and Express.js (backend), powered by Google's Gemini AI.
+# 🚀 JobCoach AI - The Future of Career Prep
+**An Intelligent, End-to-End Career Coaching Platform Powered by LLaMA 3**
 
-## ✨ Features
+[![React](https://img.shields.io/badge/React-18.x-blue?style=for-the-badge&logo=react)](https://reactjs.org/)
+[![Vite](https://img.shields.io/badge/Vite-5.x-purple?style=for-the-badge&logo=vite)](https://vitejs.dev/)
+[![Node.js](https://img.shields.io/badge/Node.js-20.x-green?style=for-the-badge&logo=node.js)](https://nodejs.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.x-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
+[![Groq API](https://img.shields.io/badge/AI-Groq_Llama3-FF4500?style=for-the-badge)](https://groq.com/)
 
-- **AI Resume Analyzer** — Upload your resume and get a detailed skill gap analysis with a 6-month personalized roadmap
-- **AI Resume Rewriter** — Transform your resume into a professional, ATS-optimized document
-- **AI Mock Interview** — Practice with real AI-powered interview questions and get detailed feedback with scores
-- **Dashboard** — Visual progress tracking with readiness scores, skill breakdowns, and month-by-month roadmap
-- **Authentication** — Secure email/password login and registration
+[**Live Demo (Frontend)**](https://dream-job-coach.vercel.app/) • [**Backend API**](https://dream-job-coach.onrender.com)
 
-## 🛠️ Tech Stack
+</div>
 
-| Layer | Technologies |
-|-------|-------------|
-| **Frontend** | React 18, TypeScript, Vite, Tailwind CSS, Framer Motion, Radix UI |
-| **Backend** | Node.js, Express.js |
-| **AI** | Google Gemini 2.5 Flash |
-| **Auth** | JWT, bcrypt |
+<br />
 
-## 🚀 Getting Started
+## 🌟 Why This Project Needs to Be Shortlisted (AMD Slingshot)
 
-### Prerequisites
-- **Node.js** 18+ installed
-- **Gemini API Key** — Get one free from [Google AI Studio](https://aistudio.google.com/app/apikey)
+In today's hyper-competitive job market, thousands of talented candidates are rejected not because they lack skills, but because they lack **access to professional career coaching**, **ATS-optimized resumes**, and **proper interview practice**. Professional career coaches charge hundreds of dollars an hour, making quality preparation completely inaccessible to the average student or job seeker.
 
-### 1. Clone the repo
+**JobCoach AI** democratizes career preparation. By leveraging cutting-edge, ultra-fast LLMs (Llama-3 via Groq), this platform provides **free, personalized, and instantaneous** career coaching. It transforms raw PDFs into actionable insights, generates custom study roadmaps, rewrites resumes to pass ATS filters, and conducts dynamically generated, company-specific technical mock interviews. 
+
+**This is a high-impact, market-ready solution that solves a massive real-world problem for millions of job seekers.**
+
+---
+
+## ✨ Core Innovations & Features
+
+### 📄 1. Intelligent PDF Resume Parsing & Benchmarking
+Unlike standard text extractors, our system parses raw PDF resumes and uses AI to map existing skills against the specific requirements of the user's **Target Company** (e.g., Google, Amazon, AMD). 
+- **Readiness Score (0-100)** to give instant reality checks.
+- **Skill Gap Analysis** (Strong, Weak, and Missing critical skills).
+
+### 🗺️ 2. Dynamic 6-Month Preparation Roadmap
+Generates a highly personalized, month-by-month actionable study plan. It doesn't just tell candidates what they are missing—it provides curated, real-world **Learning Resources** (courses, YouTube playlists, GitHub repos) to fill those exact gaps.
+
+### ✍️ 3. ATS-Optimized Resume Rewriting
+Leverages advanced prompt engineering to completely rewrite the user's resume. It converts passive statements into high-impact, quantifiable achievements using the **STAR Method** (Situation, Task, Action, Result), maximizing the chances of bypassing automated ATS parsers.
+
+### 🎤 4. AI Technical Mock Interviewer
+Taking interview prep to the next level. Instead of static question banks, JobCoach AI dynamically generates a **completely unique set of questions** specific to the target company, role, and the candidate's exact skill set.
+- Evaluates the user's typed answers in real-time.
+- Provides immediate feedback: **Score (1-10)**, **Strengths**, **Areas to Improve**, and an **Industry Pro-Tip**.
+
+### 📱 5. Stunning, Accessible UI/UX
+Built with a dark-mode first, glassmorphic design system using **Tailwind CSS** and **Framer Motion**. It provides a frictionless, premium experience comparable to high-end SaaS products.
+
+---
+
+## 🛠️ Technology Architecture
+
+### Frontend Layer (The Experience)
+- **Framework:** React 18 + Vite (for lightning-fast HMR and optimized builds)
+- **Styling & Animations:** Tailwind CSS, Framer Motion, Radix UI Primitives
+- **Data Visualization:** Recharts (for progress tracking)
+- **Routing:** React Router v6
+
+### Backend Layer (The Engine)
+- **Runtime:** Node.js + Express.js
+- **PDF Processing:** `pdf-parse` & `multer` for memory-efficient file buffering
+- **Authentication:** Custom JWT-based stateless auth with bcrypt password hashing
+- **Security:** CORS enabled, environment variable protection
+
+### AI intelligence Layer (The Brain)
+- **Provider:** **Groq Cloud API**
+- **Model:** `llama-3.3-70b-versatile` — Chosen specifically for its unparalleled inference speed, allowing complex JSON generation and parsing in milliseconds, providing a seamless "chat-like" experience for mock interviews and massive document analysis.
+
+---
+
+## 🚀 Getting Started Locally
+
+### 1. Clone & Setup
 ```bash
-git clone https://github.com/YOUR_USERNAME/dream-job-coach-ai.git
-cd dream-job-coach-ai
+git clone https://github.com/ananditaa2/jobcoachai-AMD_Slingshot.git
+cd jobcoachai-AMD_Slingshot
 ```
 
-### 2. Setup Backend
+### 2. Quick Start (Windows)
+We built a custom batch script to instantly spin up both the frontend and backend microservices with a single click.
 ```bash
-cd server
-npm install
-cp .env.example .env
-```
-Edit `server/.env` and paste your Gemini API key:
-```
-GEMINI_API_KEY=AIzaSy...your_key_here
-JWT_SECRET=any_random_long_string
-```
-
-### 3. Setup Frontend
-```bash
-cd ..
-npm install
-cp .env.example .env
-```
-
-### 4. Run the app
-**Option A — Use the start script (Windows):**
-```bash
+# Just double click or run:
 start_app.bat
 ```
 
-**Option B — Manual start:**
+### 3. Manual Start (Cross-Platform)
+**Terminal 1: Backend**
 ```bash
-# Terminal 1: Start backend
-cd server && node server.js
+cd server
+npm install
+# Ensure you have a .env file with GROQ_API_KEY, JWT_SECRET, PORT=5000
+node server.js
+```
 
-# Terminal 2: Start frontend
+**Terminal 2: Frontend**
+```bash
+npm install
 npm run dev
 ```
 
-### 5. Open in browser
-- **Frontend:** http://localhost:8090
-- **Backend API:** http://localhost:5000
+---
 
-## 📁 Project Structure
+## 🔮 Future Roadmap
+- **Voice-to-Text Mock Interviews** (Real-time speech evaluation)
+- **Chrome Extension** to auto-fill job applications using the AI-rewritten resume
+- **LinkedIn Integration** for direct profile optimization
 
-```
-dream-job-coach-ai/
-├── src/                    # Frontend source code
-│   ├── components/         # Reusable UI components
-│   ├── context/            # React contexts (Auth, App state)
-│   ├── pages/              # Page components
-│   │   ├── Welcome.tsx     # Landing page
-│   │   ├── Login.tsx       # Login page
-│   │   ├── Register.tsx    # Registration page
-│   │   ├── Analyze.tsx     # Resume upload & analysis
-│   │   ├── Dashboard.tsx   # Results dashboard
-│   │   ├── Interview.tsx   # AI mock interview
-│   │   └── ResumeRewriter.tsx  # AI resume rewriter
-│   ├── App.tsx             # Main app with routing
-│   └── main.tsx            # Entry point
-├── server/                 # Backend server
-│   ├── server.js           # Express server with AI endpoints
-│   ├── package.json        # Server dependencies
-│   └── .env.example        # Environment variables template
-├── public/                 # Static assets
-├── index.html              # HTML entry point
-├── package.json            # Frontend dependencies
-├── vite.config.ts          # Vite configuration
-├── tailwind.config.ts      # Tailwind CSS configuration
-└── start_app.bat           # Windows startup script
-```
+<br />
 
-## 🔌 API Endpoints
-
-| Method | Endpoint | Auth | Description |
-|--------|----------|------|-------------|
-| POST | `/register` | No | Create a new account |
-| POST | `/login` | No | Login and get JWT token |
-| GET | `/verify-token` | Yes | Verify JWT token |
-| POST | `/analyze` | Yes | AI resume analysis |
-| POST | `/rewrite-resume` | Yes | AI resume rewriting |
-| POST | `/interview` | Yes | AI interview feedback |
-
-## 📝 License
-
-MIT
+<div align="center">
+  <i>Built with ❤️ to help everyone land their dream job.</i>
+</div>

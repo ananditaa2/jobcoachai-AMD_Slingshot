@@ -15,7 +15,7 @@
 
 <br />
 
-## 🌟 Why This Project Needs to Be Shortlisted (AMD Slingshot)
+## 🌟All about the project!
 
 In today's hyper-competitive job market, thousands of talented candidates are rejected not because they lack skills, but because they lack **access to professional career coaching**, **ATS-optimized resumes**, and **proper interview practice**. Professional career coaches charge hundreds of dollars an hour, making quality preparation completely inaccessible to the average student or job seeker.
 
@@ -65,38 +65,6 @@ Built with a dark-mode first, glassmorphic design system using **Tailwind CSS** 
 ### AI intelligence Layer (The Brain)
 - **Provider:** **Groq Cloud API**
 - **Model:** `llama-3.3-70b-versatile` — Chosen specifically for its unparalleled inference speed, allowing complex JSON generation and parsing in milliseconds, providing a seamless "chat-like" experience for mock interviews and massive document analysis.
-
----
-
-## 🚀 Getting Started Locally
-
-### 1. Clone & Setup
-```bash
-git clone https://github.com/ananditaa2/jobcoachai-AMD_Slingshot.git
-cd jobcoachai-AMD_Slingshot
-```
-
-### 2. Quick Start (Windows)
-We built a custom batch script to instantly spin up both the frontend and backend microservices with a single click.
-```bash
-# Just double click or run:
-start_app.bat
-```
-
-### 3. Manual Start (Cross-Platform)
-**Terminal 1: Backend**
-```bash
-cd server
-npm install
-# Ensure you have a .env file with GROQ_API_KEY, JWT_SECRET, PORT=5000
-node server.js
-```
-
-**Terminal 2: Frontend**
-```bash
-npm install
-npm run dev
-```
 
 ---
 

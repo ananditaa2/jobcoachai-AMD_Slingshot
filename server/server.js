@@ -337,6 +337,7 @@ app.post("/generate-questions", authenticateToken, async (req, res) => {
 TASK: Generate 6 realistic interview questions that ${company} would actually ask for a ${role || "software engineering"} role.
 
 Candidate's skills: ${JSON.stringify(skills || [])}
+Random Seed: ${Math.random()} (Ensure this set is COMPLETELY NEW and UNIQUE, different from standard or previous questions)
 
 Include a mix of:
 - 1 behavioral question
@@ -345,7 +346,7 @@ Include a mix of:
 - 1 problem-solving question
 - 1 company-specific/culture-fit question
 
-Make them specific to ${company}'s known interview style and the candidate's skill set.
+Make them highly specific to ${company}'s known interview style, edge cases, and the candidate's skill set. AVOID generic questions like "Tell me about yourself" or "What are your weaknesses?".
 
 RESPONSE FORMAT: Return ONLY a valid JSON array (no markdown, no backticks):
 [
@@ -388,18 +389,18 @@ app.post("/rewrite-resume", authenticateToken, async (req, res) => {
 
     if (!resumeText) return res.status(400).json({ error: "Resume text is required" });
 
-    const prompt = `You are a world-class resume writer.
+    const prompt = `You are a world - class resume writer.
 
-Rewrite this resume to be more professional, impactful, and ATS-optimized:
+Rewrite this resume to be more professional, impactful, and ATS - optimized:
 
 ${resumeText}
 
-Rules: Use action verbs, quantify achievements, add ATS keywords, use STAR method, add a professional summary.
+    Rules: Use action verbs, quantify achievements, add ATS keywords, use STAR method, add a professional summary.
 
-Return ONLY the rewritten resume text. No commentary.`;
+Return ONLY the rewritten resume text.No commentary.`;
 
     const aiContent = await callAI(prompt);
-    res.json({ rewrittenResume: aiContent.replace(/```/g, "").trim() });
+    res.json({ rewrittenResume: aiContent.replace(/``` / g, "").trim() });
   } catch (error) {
     console.error("Resume Rewrite Error:", error.message);
     res.status(500).json({ error: error.message || "Resume rewriting failed" });

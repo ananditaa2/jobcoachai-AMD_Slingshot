@@ -1,26 +1,18 @@
 @echo off
 cd /d "%~dp0"
-
 echo ==============================================
-echo       Starting Dream Job Coach AI
+echo       Dream Job Coach AI - Quick Start
 echo ==============================================
+echo Starting Backend Server on Port 5000...
+start "Backend API Server" cmd /k "cd server && node server.js"
 
-echo [1/2] Launching Backend Server...
-start "CareerAI Backend" cmd /k "cd server && node server.js"
-
-timeout /t 3 >nul
-
-echo [2/2] Launching Frontend App...
-start "CareerAI Frontend" cmd /k "npm run dev"
+echo Starting Frontend Server on Port 8090...
+start "Frontend Web Server" cmd /k "npm run dev"
 
 echo.
-echo ==============================================
-echo        App Started Successfully!
-echo ==============================================
+echo Both servers are starting in separate windows!
+echo - Backend: http://localhost:5000
+echo - Frontend: http://localhost:8090
 echo.
-echo Backend: http://localhost:5000
-echo Frontend: http://localhost:8080 (or similar)
-echo.
-echo Keep these windows OPEN to keep the site running.
-echo.
+echo To stop them later, just close those two black terminal windows.
 pause

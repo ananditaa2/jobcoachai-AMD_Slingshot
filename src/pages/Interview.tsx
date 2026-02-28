@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Send, Bot, User, Sparkles, RefreshCw } from 'lucide-react';
+import { ArrowLeft, Send, Bot, User, Sparkles, RefreshCw, Mic, MicOff } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { useAppContext } from '@/context/AppContext';
@@ -39,6 +39,56 @@ const Interview = () => {
   const [input, setInput] = useState('');
   const [questionIndex, setQuestionIndex] = useState(0);
   const [isTyping, setIsTyping] = useState(false);
+  const [isListening, setIsListening] = useState(false);
+  const recognitionRef = useRef<any>(null);
+
+  // Initialize Speech Recognition
+  useEffect(() => {
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (SpeechRecognition) {
+      const recognition = new SpeechRecognition();
+      recognition.continuous = true;
+      recognition.interimResults = true;
+
+      recognition.onresult = (event: any) => {
+        let finalTranscript = '';
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          if (event.results[i].isFinal) {
+            finalTranscript += event.results[i][0].transcript;
+          }
+        }
+        if (finalTranscript) {
+          setInput((prev) => prev + finalTranscript + ' ');
+        }
+      };
+
+      recognition.onend = () => {
+        setIsListening(false);
+      };
+
+      recognitionRef.current = recognition;
+    }
+  }, []);
+
+  const toggleListening = () => {
+    if (!recognitionRef.current) {
+      toast.error('Speech recognition is not supported in this browser. Try Chrome or Edge.');
+      return;
+    }
+
+    if (isListening) {
+      recognitionRef.current.stop();
+      setIsListening(false);
+    } else {
+      try {
+        recognitionRef.current.start();
+        setIsListening(true);
+        toast.info('🎙️ Listening... Speak your answer now.');
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  };
 
   // Fetch company-specific questions on mount
   useEffect(() => {
@@ -47,6 +97,9 @@ const Interview = () => {
 
   const fetchQuestions = async () => {
     setIsLoadingQuestions(true);
+    setQuestionIndex(0);
+    setInput('');
+    setIsTyping(false);
     try {
       const response = await fetch(`${API_URL}/generate-questions`, {
         method: 'POST',
@@ -116,6 +169,10 @@ const Interview = () => {
 
   const handleSend = async () => {
     if (!input.trim() || isTyping || questions.length === 0) return;
+
+    if (isListening) {
+      toggleListening(); // Stop listening before sending
+    }
 
     const userAnswer = input.trim();
     const userMsg: Message = { role: 'user', content: userAnswer };
@@ -310,7 +367,7 @@ const Interview = () => {
         {/* Input */}
         <div className="border-t border-border bg-card/50 backdrop-blur-sm sticky bottom-0">
           <div className="container mx-auto px-6 py-4 max-w-3xl">
-            <div className="flex gap-3">
+            <div className="flex gap-3 items-end">
               <Textarea
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
@@ -320,10 +377,20 @@ const Interview = () => {
                     handleSend();
                   }
                 }}
-                placeholder="Type your answer..."
-                className="rounded-xl resize-none min-h-[48px] max-h-32"
+                placeholder={isListening ? "Listening... (Speak your answer)" : "Type your answer..."}
+                className={`rounded-xl resize-none min-h-[48px] max-h-32 ${isListening ? 'border-teal ring-1 ring-teal/50' : ''}`}
                 rows={1}
               />
+              <Button
+                onClick={toggleListening}
+                type="button"
+                variant={isListening ? "destructive" : "secondary"}
+                size="icon"
+                className={`rounded-xl shrink-0 h-12 w-12 ${isListening ? 'animate-pulse' : ''}`}
+                title={isListening ? "Stop Recording" : "Use Voice Input"}
+              >
+                {isListening ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
+              </Button>
               <Button
                 onClick={handleSend}
                 disabled={!input.trim() || isTyping}

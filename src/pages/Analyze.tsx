@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { Upload, X, Building2, FileText, Sparkles, ArrowLeft } from 'lucide-react';
+import { Upload, X, Building2, FileText, Sparkles, ArrowLeft, Briefcase } from 'lucide-react';
 import { PageTransition } from '@/components/PageTransition';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -9,7 +9,8 @@ import { useAppContext } from '@/context/AppContext';
 import { useAuth } from '@/context/AuthContext';
 import { toast } from 'sonner';
 
-const COMPANIES = ['Google', 'Microsoft', 'Amazon', 'Meta', 'Apple', 'Netflix', 'Flipkart', 'Infosys', 'TCS', 'Wipro'];
+const ROLES = ['Software Engineer', 'Data Scientist', 'Product Manager', 'AI/ML Engineer', 'Frontend Developer', 'Backend Developer', 'Hardware Engineer', 'DevOps'];
+const COMPANIES = ['Google', 'Microsoft', 'Amazon', 'Meta', 'Apple', 'Netflix', 'AMD', 'NVIDIA', 'Intel'];
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 const Analyze = () => {
@@ -20,6 +21,8 @@ const Analyze = () => {
     setResumeText,
     targetCompany,
     setTargetCompany,
+    jobRole,
+    setJobRole,
     setAnalysisData,
     setIsAnalyzing
   } = useAppContext();
@@ -102,7 +105,8 @@ const Analyze = () => {
         body: JSON.stringify({
           resumeText: resumeText,
           skills: [],
-          company: targetCompany
+          company: targetCompany,
+          role: jobRole
         })
       });
 
@@ -149,9 +153,12 @@ const Analyze = () => {
             <ArrowLeft className="w-4 h-4" /> Back
           </motion.button>
 
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-10">
-            <h1 className="text-3xl font-bold text-foreground mb-2">Upload & Analyze</h1>
-            <p className="text-muted-foreground">Provide your details for a personalized placement roadmap</p>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-10 text-center">
+            <div className="inline-flex items-center justify-center p-3 mb-4 rounded-2xl bg-teal/10 text-teal">
+              <Sparkles className="w-8 h-8" />
+            </div>
+            <h1 className="text-4xl font-extrabold text-white tracking-tight mb-3">AI Resume <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal to-emerald-400">Analysis</span></h1>
+            <p className="text-lg text-muted-foreground max-w-xl mx-auto">Upload your resume and tell us your dream role. Our Llama-3 agent will benchmark you against industry standards instantly.</p>
           </motion.div>
 
           {/* Resume Upload */}
@@ -202,31 +209,59 @@ const Analyze = () => {
 
 
 
-          {/* Target Company */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="mb-10"
-          >
-            <label className="text-sm font-medium text-foreground mb-3 flex items-center gap-2">
-              <Building2 className="w-4 h-4 text-teal" /> Target Company
-            </label>
-            <div className="flex flex-wrap gap-2 mt-2">
-              {COMPANIES.map(c => (
-                <button
-                  key={c}
-                  onClick={() => setTargetCompany(c)}
-                  className={`px-4 py-2 rounded-xl text-sm font-medium transition-all border
-                  ${targetCompany === c
-                      ? 'bg-teal text-white border-teal shadow-md'
-                      : 'bg-card text-foreground border-border hover:border-teal/50'}`}
-                >
-                  {c}
-                </button>
-              ))}
-            </div>
-          </motion.div>
+          <div className="grid md:grid-cols-2 gap-6 mb-10">
+            {/* Target Role */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 }}
+              className="bg-card/40 backdrop-blur-md p-6 rounded-3xl border border-white/5 shadow-xl"
+            >
+              <label className="text-sm font-semibold text-foreground mb-4 flex items-center gap-2">
+                <Briefcase className="w-5 h-5 text-teal" /> Target Role
+              </label>
+              <div className="flex flex-wrap gap-2 mt-3">
+                {ROLES.map(r => (
+                  <button
+                    key={r}
+                    onClick={() => setJobRole(r)}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 border
+                    ${jobRole === r
+                        ? 'bg-teal text-white border-teal shadow-[0_0_15px_rgba(20,184,166,0.5)] scale-105'
+                        : 'bg-background/50 text-muted-foreground border-white/5 hover:border-teal/30 hover:text-foreground'}`}
+                  >
+                    {r}
+                  </button>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Target Company */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3 }}
+              className="bg-card/40 backdrop-blur-md p-6 rounded-3xl border border-white/5 shadow-xl"
+            >
+              <label className="text-sm font-semibold text-foreground mb-4 flex items-center gap-2">
+                <Building2 className="w-5 h-5 text-teal" /> Target Company
+              </label>
+              <div className="flex flex-wrap gap-2 mt-3">
+                {COMPANIES.map(c => (
+                  <button
+                    key={c}
+                    onClick={() => setTargetCompany(c)}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 border
+                    ${targetCompany === c
+                        ? 'bg-teal text-white border-teal shadow-[0_0_15px_rgba(20,184,166,0.5)] scale-105'
+                        : 'bg-background/50 text-muted-foreground border-white/5 hover:border-teal/30 hover:text-foreground'}`}
+                  >
+                    {c}
+                  </button>
+                ))}
+              </div>
+            </motion.div>
+          </div>
 
           {/* Analyze Button */}
           <motion.div
@@ -236,11 +271,12 @@ const Analyze = () => {
           >
             <Button
               onClick={handleAnalyze}
+              disabled={isLoading}
               size="lg"
-              className="w-full bg-teal text-white hover:bg-teal/90 font-semibold text-lg py-6 rounded-2xl shadow-lg shadow-teal/20 hover:shadow-teal/40 hover:scale-[1.02] transition-all duration-300 border-0"
+              className="w-full bg-gradient-to-r from-teal to-emerald-500 text-white hover:opacity-90 font-bold text-lg py-7 rounded-2xl shadow-[0_0_30px_rgba(20,184,166,0.3)] hover:shadow-[0_0_40px_rgba(20,184,166,0.5)] hover:scale-[1.01] transition-all duration-300 border-0"
             >
-              <Sparkles className="mr-2 w-5 h-5" />
-              Analyze My Profile
+              <Sparkles className="mr-3 w-6 h-6" />
+              Generate Career Roadmap
             </Button>
           </motion.div>
         </div>

@@ -285,28 +285,36 @@ app.post("/upload-resume", authenticateToken, upload.single("resume"), async (re
 // ─── AI Analysis Endpoint (Enhanced with job suggestions + learning resources) ─
 app.post("/analyze", authenticateToken, async (req, res) => {
   try {
-    const { resumeText, skills, company } = req.body;
+    const { resumeText, skills, company, role } = req.body;
 
-    const prompt = `You are a career coach. Analyze this candidate for ${company}.
+    const requestedRole = role || "their target role";
+
+    const prompt = `You are an expert career coach at top tech companies. Analyze this candidate for the role of ${requestedRole} at ${company}.
 
 Resume: ${resumeText}
 Skills: ${JSON.stringify(skills)}
-Target: ${company}
+Target Company: ${company}
+Target Role: ${requestedRole}
 
-Return ONLY valid JSON (no markdown, no backticks):
+Return ONLY valid JSON (no markdown, no backticks). The JSON must have this exact structure:
 {
   "readinessScore": <0-100>,
   "targetCompany": "${company}",
+  "jobRole": "${requestedRole}",
   "strongSkills": ["skill1", "skill2"],
   "weakSkills": ["skill1", "skill2"],
-  "missingSkills": ["skill1"],
+  "missingSkills": ["skill1", "skill2"],
+  "suggestedRoles": ["role1", "role2"],
+  "learningResources": [
+    {"title": "Course Name", "url": "https://link", "type": "course | article | video"}
+  ],
   "roadmap": [
-    {"month": 1, "title": "...", "description": "..."},
-    {"month": 2, "title": "...", "description": "..."},
-    {"month": 3, "title": "...", "description": "..."},
-    {"month": 4, "title": "...", "description": "..."},
-    {"month": 5, "title": "...", "description": "..."},
-    {"month": 6, "title": "...", "description": "..."}
+    { "month": 1, "title": "Month 1 Focus", "description": "What to do" },
+    { "month": 2, "title": "Month 2 Focus", "description": "What to do" },
+    { "month": 3, "title": "Month 3 Focus", "description": "What to do" },
+    { "month": 4, "title": "Month 4 Focus", "description": "What to do" },
+    { "month": 5, "title": "Month 5 Focus", "description": "What to do" },
+    { "month": 6, "title": "Month 6 Focus", "description": "What to do" }
   ]
 }`;
 

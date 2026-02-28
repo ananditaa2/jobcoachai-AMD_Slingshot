@@ -7,6 +7,7 @@ export interface AnalysisData {
   missingSkills: string[];
   roadmap: { month: number; title: string; description: string }[];
   targetCompany: string;
+  jobRole?: string;
 }
 
 interface AppContextType {
@@ -16,6 +17,8 @@ interface AppContextType {
   setSkills: (skills: string[]) => void;
   targetCompany: string;
   setTargetCompany: (company: string) => void;
+  jobRole: string;
+  setJobRole: (role: string) => void;
   analysisData: AnalysisData | null;
   setAnalysisData: (data: AnalysisData | null) => void;
   isAnalyzing: boolean;
@@ -28,6 +31,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [resumeText, setResumeText] = useState('');
   const [skills, setSkills] = useState<string[]>([]);
   const [targetCompany, setTargetCompany] = useState('');
+  const [jobRole, setJobRole] = useState('Software Engineer');
   const [analysisData, setAnalysisData] = useState<AnalysisData | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
@@ -36,6 +40,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       resumeText, setResumeText,
       skills, setSkills,
       targetCompany, setTargetCompany,
+      jobRole, setJobRole,
       analysisData, setAnalysisData,
       isAnalyzing, setIsAnalyzing,
     }}>

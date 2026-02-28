@@ -10,7 +10,7 @@
 [![Groq API](https://img.shields.io/badge/AI-Groq_Llama3-FF4500?style=for-the-badge)](https://groq.com/)
 
 ---
-[**🎥 Watch the Video Demo (Prototype)**](YOUR_VIDEO_LINK_HERE)
+[**🎥 Watch the Video Demo (Prototype)**](https://github.com/ananditaa2/jobcoachai-AMD_Slingshot/blob/main/demo.mp4)
 ---
 </div>
 

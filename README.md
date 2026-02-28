@@ -9,8 +9,9 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.x-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
 [![Groq API](https://img.shields.io/badge/AI-Groq_Llama3-FF4500?style=for-the-badge)](https://groq.com/)
 
-[**Live Demo (Frontend)**](https://dream-job-coach.vercel.app/) • [**Backend API**](https://dream-job-coach.onrender.com)
-
+---
+[**🎥 Watch the Video Demo (Prototype)**](YOUR_VIDEO_LINK_HERE)
+---
 </div>
 
 <br />
